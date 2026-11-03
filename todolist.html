@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-   <!DOCTYPE html>
-<html>
-<head>
-    <title>Todo List</title>
 </head>
 
 <body>
@@ -59,8 +54,25 @@
 
             li.appendChild(taskSpan);
 
+            const doneButton = createDoneButton(li);
+            li.appendChild(doneButton);
+
             document.getElementById('taskList').appendChild(li);
         }
+
+        function createDoneButton(li) {
+            const doneButton = document.createElement('button');
+
+            doneButton.textContent = "Done";
+
+            doneButton.onclick = function() {
+                li.style.textDecoration = "line-through";
+                console.log("Task Completed", li.textContent, Date.now());
+            };
+
+            return doneButton;
+        }
+
     </script>
 
 </body>
