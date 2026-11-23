@@ -28,5 +28,40 @@
 
 </script>
 
+async function getWeather() {
+
+    const city = prompt(class="token string">"Enter a city name");
+
+    if (!city) {
+        alert(class="token string">"No city entered");
+        return;
+    }
+
+    const url =
+        `https:class=class="token string">"token comment">//api.openweathermap.org/data/class="token number">2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(class="token string">"City not found");
+        }
+
+        const data = await response.json();
+
+        getWeatherByCoordinates(
+            data.coord.lat,
+            data.coord.lon
+        );
+
+    } catch (error) {
+
+        alert(class="token string">"Error: " + error.message);
+
+    }
+}
+
 </body>
 </html>
