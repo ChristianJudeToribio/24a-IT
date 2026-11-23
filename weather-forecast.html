@@ -63,5 +63,38 @@ async function getWeather() {
     }
 }
 
+
+function getGPSLocation() {
+
+    if (!navigator.geolocation) {
+        alert(class="token string">"Geolocation is not supported by your browser.");
+        return;
+    }
+
+    document.getElementById(class="token string">"locationResult").innerHTML =
+        class="token string">"Getting your location...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            getWeatherByCoordinates(latitude, longitude);
+
+        },
+
+        function(error) {
+
+            document.getElementById(class="token string">"locationResult").innerHTML = class="token string">"";
+
+            alert(class="token string">"GPS Error: " + error.message);
+
+        }
+
+    );
+}
+
 </body>
 </html>
