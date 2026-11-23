@@ -26,19 +26,17 @@
 
     const apiKey = "00c68b8a87f4a8ca6136251a1268f95d";
 
-</script>
-
 async function getWeather() {
 
-    const city = prompt(class="token string">"Enter a city name");
+    const city = prompt("Enter a city name");
 
     if (!city) {
-        alert(class="token string">"No city entered");
+        alert("No city entered");
         return;
     }
 
     const url =
-        `https:class=class="token string">"token comment">//api.openweathermap.org/data/class="token number">2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
 
 
     try {
@@ -46,7 +44,7 @@ async function getWeather() {
         const response = await fetch(url);
 
         if (!response.ok) {
-            throw new Error(class="token string">"City not found");
+            throw new Error("City not found");
         }
 
         const data = await response.json();
@@ -58,7 +56,7 @@ async function getWeather() {
 
     } catch (error) {
 
-        alert(class="token string">"Error: " + error.message);
+        alert("Error: " + error.message);
 
     }
 }
@@ -67,12 +65,12 @@ async function getWeather() {
 function getGPSLocation() {
 
     if (!navigator.geolocation) {
-        alert(class="token string">"Geolocation is not supported by your browser.");
+        alert("Geolocation is not supported by your browser.");
         return;
     }
 
-    document.getElementById(class="token string">"locationResult").innerHTML =
-        class="token string">"Getting your location...";
+    document.getElementById("locationResult").innerHTML =
+        "Getting your location...";
 
     navigator.geolocation.getCurrentPosition(
 
@@ -87,9 +85,9 @@ function getGPSLocation() {
 
         function(error) {
 
-            document.getElementById(class="token string">"locationResult").innerHTML = class="token string">"";
+            document.getElementById("locationResult").innerHTML = "";
 
-            alert(class="token string">"GPS Error: " + error.message);
+            alert("GPS Error: " + error.message);
 
         }
 
@@ -99,67 +97,67 @@ function getGPSLocation() {
 async function getWeatherByCoordinates(latitude, longitude) {
 
     const weatherUrl =
-        `https:class=class="token string">"token comment">//api.openweathermap.org/data/class="token number">2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
 
     const forecastUrl =
-        `https:class=class="token string">"token comment">//api.openweathermap.org/data/class="token number">2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
 
     try {
 
-        class=class="token string">"token comment">// Current Weather
+        // Current Weather
 
         const weatherResponse = await fetch(weatherUrl);
 
         if (!weatherResponse.ok) {
-            throw new Error(class="token string">"Unable to retrieve weather");
+            throw new Error("Unable to retrieve weather");
         }
 
         const data = await weatherResponse.json();
 
-        document.getElementById(class="token string">"locationResult").innerHTML =
+        document.getElementById("locationResult").innerHTML =
             `Location: ${data.name}, ${data.sys.country}`;
 
-        document.getElementById(class="token string">"weatherResult").innerHTML = `
+        document.getElementById("weatherResult").innerHTML = `
 
             <h2>Current Weather</h2>
 
             <h3>${data.name}, ${data.sys.country}</h3>
 
-            <img src=class="token string">"https:class="token commentclass="token string">">//openweathermap.org/img/wn/${data.weather[class="token number">0].icon}@2x.png">
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
 
 
             <p>Temperature: ${data.main.temp} °C</p>
 
-            <p>Weather: ${data.weather[class="token number">0].description}</p>
+            <p>Weather: ${data.weather[0].description}</p>
 
             <p>Humidity: ${data.main.humidity}%</p>
 
             <p>Wind Speed: ${data.wind.speed} m/s</p>
 
         `;
-        class=class="token string">"token comment">// class="token number">5-Day Forecast
+        // 5-Day Forecast
 
         const forecastResponse = await fetch(forecastUrl);
 
         if (!forecastResponse.ok) {
-            throw new Error(class="token string">"Unable to retrieve forecast");
+            throw new Error("Unable to retrieve forecast");
         }
 
         const forecastData = await forecastResponse.json();
 
         const forecastResult =
-            document.getElementById(class="token string">"forecastResult");
+            document.getElementById("forecastResult");
 
         forecastResult.innerHTML = `
-            <h2>class="token number">5-Day Weather Forecast</h2>
+            <h2>5-Day Weather Forecast</h2>
         `;
 
-        class=class="token string">"token comment">// Display forecast every class="token number">24 hours
+        // Display forecast every 24 hours
 
         forecastData.list
-            .filter(item => item.dt_txt.includes(class="token string">"class="token number">12:class="token number">00:class="token number">00"))
+            .filter(item => item.dt_txt.includes("12:00:00"))
             .forEach(item => {
 
                 forecastResult.innerHTML += `
@@ -168,12 +166,12 @@ async function getWeatherByCoordinates(latitude, longitude) {
 
                     <h3>${item.dt_txt}</h3>
 
-                    <img src=class="token string">"https:class="token commentclass="token string">">//openweathermap.org/img/wn/${item.weather[class="token number">0].icon}@2x.png">
+                    <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
 
 
                     <p>Temperature: ${item.main.temp} °C</p>
 
-                    <p>Weather: ${item.weather[class="token number">0].description}</p>
+                    <p>Weather: ${item.weather[0].description}</p>
 
                     <p>Humidity: ${item.main.humidity}%</p>
 
@@ -185,10 +183,13 @@ async function getWeatherByCoordinates(latitude, longitude) {
 
     } catch (error) {
 
-        alert(class="token string">"Error: " + error.message);
+        alert("Error: " + error.message);
 
     }
 
 }
+
+</script>
+
 </body>
 </html>
