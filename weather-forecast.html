@@ -96,5 +96,49 @@ function getGPSLocation() {
     );
 }
 
+async function getWeatherByCoordinates(latitude, longitude) {
+
+    const weatherUrl =
+        `https:class=class="token string">"token comment">//api.openweathermap.org/data/class="token number">2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+
+    const forecastUrl =
+        `https:class=class="token string">"token comment">//api.openweathermap.org/data/class="token number">2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+
+    try {
+
+        class=class="token string">"token comment">// Current Weather
+
+        const weatherResponse = await fetch(weatherUrl);
+
+        if (!weatherResponse.ok) {
+            throw new Error(class="token string">"Unable to retrieve weather");
+        }
+
+        const data = await weatherResponse.json();
+
+        document.getElementById(class="token string">"locationResult").innerHTML =
+            `Location: ${data.name}, ${data.sys.country}`;
+
+        document.getElementById(class="token string">"weatherResult").innerHTML = `
+
+            <h2>Current Weather</h2>
+
+            <h3>${data.name}, ${data.sys.country}</h3>
+
+            <img src=class="token string">"https:class="token commentclass="token string">">//openweathermap.org/img/wn/${data.weather[class="token number">0].icon}@2x.png">
+
+
+            <p>Temperature: ${data.main.temp} °C</p>
+
+            <p>Weather: ${data.weather[class="token number">0].description}</p>
+
+            <p>Humidity: ${data.main.humidity}%</p>
+
+            <p>Wind Speed: ${data.wind.speed} m/s</p>
+
+        `;
+
 </body>
 </html>
