@@ -20,11 +20,11 @@
 
     <script>
 
-function getTaskText() {
-   const input = document.getElementById("taskput");
-   const text = input.value.trim();
-   console.log("The input value is :" + input.value); // Log the task text to the console 
-   return text;
+    function getTaskText() {
+    const input = document.getElementById("taskput");
+    const text = input.value.trim();
+    console.log("The input value is :" + input.value); // Log the task text to the console 
+return text;
 }
 
 function addTask() {
@@ -61,15 +61,15 @@ function createDoneButton(li) {
     const doneButton = document.createElement("button");
     doneButton.textContent = "Done";
     doneButton.onclick = () => {
-      console.log(li);
-      li.classList.add("done");
-      const buttons = li.querySelectorAll("button");
+    console.log(li);
+    li.classList.add("done");
+    const buttons = li.querySelectorAll("button");
 
-      buttons.forEach(button => {
+    buttons.forEach(button => {
         button.disabled = true;
-      });
+    });
 
-      console.log("Task Completed", li.textContent, Date.now());
+    console.log("Task Completed", li.textContent, Date.now());
     };
     return doneButton;
 }
