@@ -139,6 +139,56 @@ async function getWeatherByCoordinates(latitude, longitude) {
             <p>Wind Speed: ${data.wind.speed} m/s</p>
 
         `;
+        class=class="token string">"token comment">// class="token number">5-Day Forecast
 
+        const forecastResponse = await fetch(forecastUrl);
+
+        if (!forecastResponse.ok) {
+            throw new Error(class="token string">"Unable to retrieve forecast");
+        }
+
+        const forecastData = await forecastResponse.json();
+
+        const forecastResult =
+            document.getElementById(class="token string">"forecastResult");
+
+        forecastResult.innerHTML = `
+            <h2>class="token number">5-Day Weather Forecast</h2>
+        `;
+
+        class=class="token string">"token comment">// Display forecast every class="token number">24 hours
+
+        forecastData.list
+            .filter(item => item.dt_txt.includes(class="token string">"class="token number">12:class="token number">00:class="token number">00"))
+            .forEach(item => {
+
+                forecastResult.innerHTML += `
+
+                    <hr>
+
+                    <h3>${item.dt_txt}</h3>
+
+                    <img src=class="token string">"https:class="token commentclass="token string">">//openweathermap.org/img/wn/${item.weather[class="token number">0].icon}@2x.png">
+
+
+                    <p>Temperature: ${item.main.temp} °C</p>
+
+                    <p>Weather: ${item.weather[class="token number">0].description}</p>
+
+                    <p>Humidity: ${item.main.humidity}%</p>
+
+                    <p>Wind Speed: ${item.wind.speed} m/s</p>
+
+                `;
+
+            });
+
+    } catch (error) {
+
+        alert(class="token string">"Error: " + error.message);
+
+    }
+
+}
 </body>
 </html>
